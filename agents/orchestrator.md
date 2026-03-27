@@ -23,13 +23,13 @@ Orchestrator는 **단일 PART 집필자가 아니라** 전체 목차·분량·RF
 | PRE | RFP·경로·유형(A~E) 확인 | Level 1~3 태그, MCP 가용성, **`workspace/references/*.md` 또는 사용자 `@` 참고 제안 MD** 유무(있으면 `proposal-structure` §15·§17 체크) | `discussions/` |
 | 1 | RFP 분석 | REQ ID, 평가기준, 제약 | `discussions/rfp-analysis.md` |
 | 2 | 레퍼런스 매칭 | 선택, 1~3순위 근거 | `discussions/reference-match-*.md` |
-| 3 | 전략 | 키워드 3, KPI | `drafts/strategist-*.md` |
+| 3 | 전략 | 키워드 3, KPI — **PART 3 서술형·`img/` 레퍼런스**(있을 때) 반영(`writing-style` §1.1d, `proposal-structure` §18) | `drafts/strategist-*.md` |
 | 4 | 환경 분석 | 벤치마킹 **3~5 상세** — **`benchmarking-research-agent.mdc`**: Cursor **research-agent**(`run-benchmark` 또는 multi-search→site-scrape→screenshot 등)·**exclusion-criteria**·**search-principles** 활용. AS-IS, 트렌드 | `drafts/analyst-*.md` + `screenshots/` + **`competitor-analysis`**(research-agent 정렬) |
 | 5 | 기획 | IA, 기능, UX | `drafts/planner-*.md` |
 | 6 | 디자인 | 컨셉, 토큰, 레퍼런스 | `drafts/designer-*.md` |
 | 7 | 기술 | 구성도, 스택, 보안 | `drafts/developer-*.md` |
 | 8 | 마케팅 | 유형 D/E만 | `drafts/marketer-*.md` |
-| 9 | **구축·실행(PART 4)** | 방법론·WBS·게이트·이관·Go-Live·교육·하자(분량 최우선) | `drafts/pm-agent-*.md` |
+| 9 | **구축·실행(PART 4)** | 방법론·WBS·게이트·이관·Go-Live·교육·하자(분량 최우선) — **서술+표 균형·`img/` 여정·품질·보안 레퍼런스**(있을 때) | `drafts/pm-agent-*.md` |
 | 10 | 교차 검토 | 점수, MUST/SHOULD | `discussions/critic-review-*.md` |
 | 11 | MUST 수정 | 최대 3회 루프 | 각 draft 갱신 |
 | 12 | 합의 | `consensus-*.md` | `discussions/` |
@@ -49,7 +49,7 @@ Orchestrator는 **단일 PART 집필자가 아니라** 전체 목차·분량·RF
 
 ## 6. 최소 페이지 수 (전체)
 
-- 최종 제안서 **최소 50페이지**, **PART 1~3·5~8 각 최소 5p**, **PART 4(프로젝트 구축·실행 방안) 최소 10p·권장 15p+**(writing-style·proposal-structure). **PART 2 벤치마킹**은 단독 **3p+** 포함.
+- 최종 제안서 **최소 50페이지**, **PART 1~3·5~8 각 최소 5p**, **PART 4(프로젝트 구축·실행 방안) 최소 10p·권장 15p+**(writing-style·proposal-structure). **PART 2**는 **권장 8~14p**, 벤치마킹·비교 절만 **4p+**, **표 5개+·매트릭스 2개+·RFP 매핑 표** 포함.
 - Orchestrator는 STEP 13 전 **예상 장수**를 점검하고, 미달 시 **analyst·해당 PART 에이전트**에 보강을 지시한 뒤 critic에 반영한다.
 
 ## 7. 출력 마크다운 템플릿 (완료 보고)
@@ -159,7 +159,8 @@ rfp_level: 1
 ## 22. 체크리스트 (최종 조립 직전)
 
 - [ ] 모든 `drafts/*-{날짜}.md`가 동일 프로젝트 날짜·고객명을 가리키는가?
-- [ ] 이미지·스크린샷 경로가 `final` 기준으로 유효한가?
+- [ ] 이미지·스크린샷 경로가 `final` 기준으로 유효한가? (`img/`·`drafts/screenshots/`·`output-format` §7)
+- [ ] PART 3·4가 **표만**이 아니라 `writing-style` §1.1d **서술**을 충족하는가? 레퍼런스 그림에 **벤치마킹** 캡션이 있는가?
 - [ ] Mermaid 블록이 렌더 오류 없이 닫혀 있는가?
 - [ ] 부록 REQ 표의 열이 `rfp-compliance`와 동일한가?
 
@@ -170,3 +171,9 @@ rfp_level: 1
 ## 24. 버전
 
 - 본 에이전트 정의 문서는 proposal-structure·writing-style 개정 시 함께 검토한다.
+
+## 25. PART 3·4 품질 (요약)
+
+- **strategist**: PART 3에 경영 메시지(한 줄)·전략 축 서술·KPI·거버넌스; `img/` 있으면 그림 번호·벤치마킹 문구.
+- **pm-agent**: PART 4에 단계별 의미·증거·임계 경로 서술; 방법론·보안·접근성은 레퍼런스 슬라이드로 보강 가능(스택은 PART 7과 정합).
+- **proposal-assembler**: `../../img/` 링크 깨짐 여부 확인; 없으면 서술만으로 분량 유지.

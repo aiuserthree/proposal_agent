@@ -34,7 +34,7 @@ description: 드래프트를 최종 제안서로 조립
 3. **목차 골격**: proposal-structure PART 1~8 + (선택) 프롤로그 + 부록(APPENDIX) 헤딩을 생성한다.
 4. **본문 병합**: 에이전트별 담당 PART를 순서대로 이어붙인다(중복 제목 정리).
 5. **용어 통일**: consistency-validator 결과 또는 수동으로 용어·수치를 맞춘다.
-6. **시각 요소**: 표·Mermaid 블록이 깨지지 않았는지 검증한다.
+6. **시각 요소**: 표·Mermaid 블록이 깨지지 않았는지 검증한다. **`img/` 레퍼런스**(있을 때)는 `workspace/final/proposal-*.md` 기준 상대 경로(`../../img/...`)가 열리는지 확인하고, PART 3·4에 **서술 문단**이 `writing-style` §1.1d를 충족하는지 스팟 점검한다.
 7. **매핑 부록**: rfp-compliance-checker 산출 또는 표를 부록에 삽입한다. 시장 통계·긴 표는 **부록 A** 본문, **부록 B** 레퍼런스 출처로 분리 가능(writing-style §15).
 8. **발표 Notes**: 사용자·RFP가 PT 제출이면 PART별 하단에 `> **Notes:**` 선택 삽입(writing-style §16).
 9. **메타**: 표지에 사업명·제출일·아이뱅크 표기(ibank-identity).

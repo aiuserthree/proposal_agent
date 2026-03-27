@@ -72,3 +72,15 @@ alwaysApply: true
 - [ ] `exclusion-criteria`·`search-principles`를 검토했는가?
 - [ ] `run-benchmark` 또는 **multi-search → site-scrape → screenshot-capture**(및 필요 시 traffic-verify) 순을 수행했는가?
 - [ ] analyst 초안에 **research-agent 산출물 경로**(또는 동일 절차 수행 로그)가 있는가?
+
+## 6. 제안서 PART 2에 반드시 반영할 요약 (proposal-factory 정렬)
+
+아래가 **최종 제안서 PART 2**에 녹아 있어야 “연동 완료”로 본다. 리포트 전문을 붙여넣지 않고 **표·시사점·URL**으로 압축한다.
+
+| 반영 항목 | 설명 |
+|-----------|------|
+| **선정·제외** | 후보 탐색 경로, 탈락 사유 1개 이상(또는 “제외 후보 없음”+이유) |
+| **사이트별 서술** | 사이트당 **IA·검색·성능·콘텐츠·접근성** 중 과제 맞춤 4축 이상 + **귀사 적용** 문장 |
+| **매트릭스 2+** | 통합 비교 + 세부 축(검색·채널·문서 등) |
+| **RFP 매핑** | 벤치 관찰 ↔ RFP **§ 또는 REQ** 1표 이상 |
+| **경로** | `output/reports/` 또는 `drafts/`·`screenshots/` 등 **실제 경로** 1줄 이상 |

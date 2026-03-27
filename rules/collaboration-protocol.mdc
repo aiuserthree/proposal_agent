@@ -1,0 +1,152 @@
+---
+description: "에이전트 간 협업 규칙을 정의합니다"
+alwaysApply: true
+---
+# 에이전트 협업·실행·산출물 규칙
+
+제안서 제작은 **Orchestrator**가 중앙 조율하고, 역할 에이전트가 **drafts**를 생산하며, **discussions**에서 합의·질문을 관리한다.
+
+## 1. 폴더·파일 명명 규칙
+
+| 항목 | 규칙 | 예시 |
+|------|------|------|
+| 드래프트 | `{에이전트}-{역할키}-{YYYY-MM-DD}.md` | `analyst-환경분석-2026-03-27.md` |
+| 합의 | `consensus-{YYYY-MM-DD}.md` | `consensus-2026-03-27.md` |
+| 검토 | `critic-review-{YYYY-MM-DD}.md` | `critic-review-2026-03-27.md` |
+| RFP 분석 | `rfp-analysis.md` 또는 `rfp-analysis-{날짜}.md` | `workspace/discussions/` |
+| 최종본 | `proposal-{고객사약칭}-{YYYY-MM-DD}.md` | `workspace/final/proposal-OO기업-2026-03-27.md` |
+| 스크린샷 | `workspace/drafts/screenshots/{출처}/` | URL·사이트명 폴더 |
+
+**경로 기준**: 플러그인 사용 시 워크스페이스 루트의 `workspace/` 하위를 기본으로 한다. 사용자가 다른 루트를 지정하면 orchestrator가 그에 맞춘다.
+
+## 2. 에이전트 실행 순서 (기본)
+
+순차 실행이 기본이다. 의존성은 다음과 같다.
+
+1. **RFP 입력** → rfp-parser / rfp-analysis (또는 동등 분석)
+2. **reference-matcher** (선택, 참고 레퍼런스 있을 때)
+3. **analyst** (환경·벤치마킹·AS-IS) — 벤치마킹 작성 시 **`benchmarking-research-agent.mdc`** 및 Cursor **research-agent** 플러그인 스킬·룰 필수 연동
+4. **strategist** (사업이해·전략 — analyst 참조)
+5. **planner** (IA·기능·UX — strategist·analyst 참조)
+6. **designer** (디자인 — strategist·planner 참조)
+7. **developer** (기술 — planner·RFP 기술)
+8. **marketer** (유형 D/E만)
+9. **pm-agent** (일정·조직·품질 — 전 PART 일관성)
+10. **critic** (교차 검토)
+11. **consensus-builder** (필요 시)
+12. **proposal-assembler** (최종 조립)
+
+## 3. 병렬·순차 규칙
+
+| 병렬 가능 | 순차 필수 |
+|-----------|-----------|
+| analyst 내부: **research-agent** 스킬(`multi-search` 등) + MCP(Brave/Firecrawl/Playwright) | strategist는 analyst **요약** 후 본문 확정 |
+| trend-research vs **competitor-analysis**(research-agent 절차 포함, 동일 analyst 세션) | planner는 strategist **전략 키워드** 확정 후 |
+| consistency-validator는 초안·최종 양쪽에서 실행 | critic **이후** 최종 조립 |
+
+**충돌 원칙**: 동일 사실(수치·기간·인원)은 **한 출처**를 정하고(pm-agent 또는 rfp-analysis) 다른 에이전트는 참조만 한다.
+
+## 4. 산출물 경로 규칙
+
+| 산출물 유형 | 저장 위치 |
+|-------------|-----------|
+| 에이전트별 초안 | `workspace/drafts/` |
+| 질문·합의·합의 실패 | `workspace/discussions/` |
+| 최종 제안서 | `workspace/final/` |
+| 공용 스크린샷·캡처 | `workspace/drafts/screenshots/` |
+
+**참조 시**: 본문에 "상세는 `drafts/analyst-…-날짜.md`" 형태로 파일명을 명시할 수 있다(최종본에서는 부록으로 압축 가능).
+
+## 5. 합의 절차
+
+1. **발의**: 한 에이전트의 주장이 다른 에이전트와 충돌하면 discussions에 이슈 등록.
+2. **근거**: RFP·데이터·레퍼런스 우선순위로 정렬.
+3. **합의 기록**: `consensus-{날짜}.md`에 합의안·미결정·후속 조치.
+4. **미결정**: Orchestrator가 **가정** 또는 **옵션 A/B**로 분기하고 PART 1에 전제 명시.
+
+## 6. 재작성 규칙
+
+| 트리거 | 조치 |
+|--------|------|
+| critic MUST | 해당 섹션 담당 에이전트가 1회 수정 |
+| 동일 MUST 2회 실패 | strategist·planner·developer 연관 재검토 |
+| 3회 초과 | Orchestrator가 범위 축소·옵션 분기·사용자 확인(규칙 허용 시) |
+
+**재작성 시**: 이전 버전 파일명에 `_v2` 접미 또는 날짜 분리로 보존.
+
+## 7. 금지·권장
+
+| 구분 | 금지 | 권장 |
+|------|------|------|
+| 참조 | "앞서 말한 바와 같이"만 반복 | 파일명·절 번호 |
+| 병렬 | 의존성 무시 동시 작성 | 순서도·체크리스트 준수 |
+| 합의 | 구두만으로 확정 | consensus.md 반영 |
+
+## 8. 협업 체크리스트
+
+- [ ] 각 에이전트 산출물이 파일명 규칙을 따르는가?
+- [ ] 수치·기간·인원이 한 곳에서 마스터되는가?
+- [ ] critic MUST가 반영되었는가?
+- [ ] 최종 조립본이 `final/`에 있는가?
+- [ ] 미결정 사항이 PART 1 전제에 있는가?
+
+## 9. 예시 문장 (상호 참조)
+
+- "본 절의 기능 목록은 `drafts/planner-기능설계-2026-03-27.md`의 REQ 매핑과 동일합니다."
+- "일정은 `drafts/pm-agent-수행계획-2026-03-27.md`의 마일스톤을 따릅니다."
+
+## 10. 에이전트별 기본 산출 키 (참고)
+
+| 에이전트 | 역할키 예시 | 비고 |
+|----------|-------------|------|
+| analyst | 환경분석, 벤치마킹 | research-agent 연동, 스크린샷·리포트 경로 병행 |
+| strategist | 전략, 사업이해 | PART 1·3 |
+| planner | 기능설계, IA | PART 5 |
+| designer | 디자인전략 | PART 6 |
+| developer | 기술설계 | PART 7 |
+| pm-agent | 수행계획 | PART 4 |
+| marketer | 마케팅전략 | 유형 D/E |
+
+## 11. 병렬 작업 시 데이터 일관성
+
+- 동일 시점의 **예산·기간**은 한 파일(`rfp-analysis.md` 또는 `pm-agent`)에만 수정 권한을 둔다.
+- 다른 에이전트는 **인용**만 하며, 변경 필요 시 consensus에 올린다.
+
+## 12. 충돌 3회 초과 시 (요약)
+
+1. 이슈 ID와 누적 시도 횟수를 `discussions/issues.md`에 기록한다.
+2. Orchestrator가 **범위 축소**, **가정 명시**, **사용자 확인** 중 하나를 선택한다.
+3. 선택 결과를 `consensus-*.md`에 반영한다.
+
+## 13. 산출물 검수 게이트
+
+| 게이트 | 조건 |
+|--------|------|
+| G1 | rfp-analysis 존재 |
+| G2 | drafts 1차 완료 |
+| G3 | critic-review MUST=0 또는 승인 |
+
+## 14. 예시 표: 상호 참조 블록
+
+| 본문 위치 | 참조 대상 파일 | 목적 |
+|-----------|----------------|------|
+| PART 5 | planner-기능설계-*.md | 기능 ID |
+| PART 4 | pm-agent-수행계획-*.md | 일정 |
+
+## 15. 금지·권장 요약 (추가)
+
+| 구분 | 금지 | 권장 |
+|------|------|------|
+| 저장 | 데스크톱 임의 경로에만 저장 | `workspace/` 하위 표준 경로 |
+| 이름 | 공백·특수문자 파일명 | 하이픈·영숫자 |
+
+## 16. 체크리스트 (확장)
+
+- [ ] `discussions/`에 최신 `rfp-analysis`가 있는가?
+- [ ] 동일 과제에 대해 날짜가 다른 draft가 2개 이상이면 **최신 버전**이 명시되었는가?
+- [ ] consensus에 미결정이 있으면 PART 1 전제에 반영되었는가?
+
+## 17. 문서 이력
+
+- 규칙 개정 시 `collaboration-protocol` 변경 요약을 한 줄 남긴다(예: 버전·날짜).
+

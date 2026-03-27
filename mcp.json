@@ -1,0 +1,1 @@
+﻿{"mcpServers":{"brave-search":{"command":"npx","args":["-y","@modelcontextprotocol/server-brave-search"],"env":{"BRAVE_API_KEY":"BSAMsrMVOm1gHuwFPXrCyJVb8OkwMFa"}},"firecrawl":{"command":"npx","args":["-y","firecrawl-mcp"],"env":{"FIRECRAWL_API_KEY":"fc-5a221bffb8f34b6ea56e3a756d44be07"}},"playwright":{"command":"npx","args":["-y","@playwright/mcp@latest"]}}}

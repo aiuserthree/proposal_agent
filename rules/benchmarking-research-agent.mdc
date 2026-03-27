@@ -1,0 +1,74 @@
+---
+description: "제안서 PART 2 벤치마킹은 Cursor에 설치된 research-agent 플러그인 룰·스킬·에이전트를 반드시 활용한다"
+alwaysApply: true
+---
+# 벤치마킹 ↔ research-agent (필수 연동)
+
+제안서 **환경 분석·벤치마킹(PART 2 / analyst·competitor-analysis)** 은 proposal-factory 단독 추론이 아니라, **Cursor에 설치된 `research-agent`(Website Benchmarking Research Agent, ibank-marketplace)** 의 절차·품질 기준을 **반드시** 따른다.
+
+## 1. 적용 범위
+
+| 구분 | 내용 |
+|------|------|
+| **필수** | 동종·레퍼런스 사이트 **3~5개** 선정, URL·비교표·스크린샷·(가능 시) 트래픽·브랜딩 추출 |
+| **제외** | 벤치마킹을 `web_search` 한두 번만으로 끝내는 것(연구 에이전트 미활용) |
+
+## 2. 활용할 플러그인 자산 (research-agent)
+
+에이전트·스킬 실행 시 아래를 **읽고 따른다**(플러그인 루트: `research-agent/main/.cursor/`).
+
+### 2.1 규칙 (Rules)
+
+| 파일 | 용도 |
+|------|------|
+| `rules/exclusion-criteria.mdc` | 후보 제외 5조건·보정 3규칙 |
+| `rules/search-principles.mdc` | 검색·관찰 원칙(복수 경로, 교차 검증 등) |
+| `rules/output-format.mdc` | 후보·리포트 데이터 공통 포맷 |
+| `rules/file-conventions.mdc` | 산출물 저장 경로 규칙 |
+
+### 2.2 스킬 (Skills)
+
+| 스킬 | 용도 |
+|------|------|
+| **`run-benchmark`** | 벤치마킹 프로세스 진입점 — `context-builder` → `orchestrator` 파이프라인 호출 |
+| **`multi-search`** | 한·영 병렬 검색·통합 |
+| **`site-scrape`** | URL 구조·기능 추정·제외 조건 검증 |
+| **`screenshot-capture`** | 데스크톱/모바일 풀페이지 캡처 |
+| **`traffic-verify`** | 규모 검증(SimilarWeb 등) |
+| **`branding-extract`** | (Inspire 후보) 색·폰트·컴포넌트 JSON |
+
+필요 시 research-agent README의 **`/run-benchmark`** 또는 **`/start`** 로 **동일 RFP·브리프**를 넣어 전체 리서치를 돌린 뒤, 산출물을 제안서 `workspace/drafts/`에 **요약·인용**한다.
+
+### 2.3 에이전트 (Agents)
+
+| 에이전트 | 용도 |
+|----------|------|
+| `context-builder` | 인풋 → `project-brief.json` 표준화 |
+| `orchestrator` | PHASE 1~5 벤치마킹 총괄 |
+| `market-researcher` | Direct 경쟁 후보 |
+| `design-researcher` | Inspire·비주얼 |
+| `ux-researcher` | Indirect 기능 벤치마킹 |
+| `site-auditor` | PASS/FAIL·플래그 검증 |
+
+제안서 작성 세션에서 **Task 도구로 서브에이전트를 호출할 수 있으면**, 벤치마킹 단계에 위 역할을 **우선 할당**한다.
+
+## 3. proposal-factory와의 합류 지점
+
+1. **입력**: `workspace/discussions/rfp-analysis.md`(또는 RFP 요약)를 research-agent 인풋으로 사용한다.
+2. **산출**: research-agent의 `output/reports/`, `output/screenshots/`, `output/branding/` 등은 **경로를 analyst 초안 상단 메타**에 기록하고, 제안서 PART 2 본문에는 **비교 표·시사점·URL**을 반영한다.
+3. **분량**: `writing-style` **1.1b·1.1c**(PART 2 **5p+**, 벤치마킹 단독 **3p+**)는 유지한다. research-agent 리포트는 **근거·부록**으로 활용한다.
+4. **실패 시**: MCP·API 미가동 시 **한계를 명시**하고, 가능한 범위에서 `search-principles`·`exclusion-criteria`를 **수동으로** 적용한 뒤 재시도한다(무단 생략 금지).
+
+## 4. 금지·권장
+
+| 구분 | 금지 | 권장 |
+|------|------|------|
+| 절차 | proposal-factory만으로 벤치마킹 완료 주장 | research-agent 스킬·룰을 실행하거나 동일 절차를 문서화 |
+| 산출물 | 후보 선정 근거 없음 | exclusion-criteria·traffic 근거 URL/출처 |
+| 중복 | 리포트 전문을 제안서에 붙여넣기 | 요약·표·인사이트만 PART 2에, 상세는 drafts/·부록 참조 |
+
+## 5. 체크리스트 (analyst·critic 공통)
+
+- [ ] `exclusion-criteria`·`search-principles`를 검토했는가?
+- [ ] `run-benchmark` 또는 **multi-search → site-scrape → screenshot-capture**(및 필요 시 traffic-verify) 순을 수행했는가?
+- [ ] analyst 초안에 **research-agent 산출물 경로**(또는 동일 절차 수행 로그)가 있는가?

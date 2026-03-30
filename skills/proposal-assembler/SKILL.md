@@ -34,7 +34,7 @@ description: 드래프트를 최종 제안서로 조립
 3. **목차 골격**: proposal-structure PART 1~8 + (선택) 프롤로그 + 부록(APPENDIX) 헤딩을 생성한다.
 4. **본문 병합**: 에이전트별 담당 PART를 순서대로 이어붙인다(중복 제목 정리).
 5. **용어 통일**: consistency-validator 결과 또는 수동으로 용어·수치를 맞춘다.
-6. **시각 요소**: 표·Mermaid 블록이 깨지지 않았는지 검증한다. **`img/` 레퍼런스**(있을 때)는 `workspace/final/proposal-*.md` 기준 상대 경로(`../../img/...`)가 열리는지 확인하고, PART 3·4에 **서술 문단**이 `writing-style` §1.1d를 충족하는지 스팟 점검한다.
+6. **시각 요소**: 표·Mermaid 블록이 깨지지 않았는지 검증한다. **PART 3·4 본문에 참고용 `img/` 삽입(`![...]`)이 없는지** 확인한다(`proposal-structure` §18). PART 2 등 **스크린샷·자산**은 `output-format` 경로가 유효한지 확인한다. PART 3·4 **서술 문단**이 `writing-style` §1.1d·`proposal-structure` §19를 충족하는지 스팟 점검한다.
 7. **매핑 부록**: rfp-compliance-checker 산출 또는 표를 부록에 삽입한다. 시장 통계·긴 표는 **부록 A** 본문, **부록 B** 레퍼런스 출처로 분리 가능(writing-style §15).
 8. **발표 Notes**: 사용자·RFP가 PT 제출이면 PART별 하단에 `> **Notes:**` 선택 삽입(writing-style §16).
 9. **메타**: 표지에 사업명·제출일·아이뱅크 표기(ibank-identity).
@@ -46,7 +46,7 @@ description: 드래프트를 최종 제안서로 조립
 2. 동일 사실의 수치·기간·인원이 본문 전체에서 일관.
 3. REQ ID 참조가 부록과 모순 없음.
 4. 최소 분량(writing-style **50p**, PART **1~3·5~8: 5p**, **PART4 구축·실행: 10p+**, PART2 벤치마킹 **3p+**) 충족 또는 부족 시 보강 플래그.
-5. 이미지 상대 경로가 최종 폴더 기준으로 유효.
+5. 허용된 이미지(예: PART 2 스크린샷, `final/assets/`) 상대 경로가 유효하고, PART 3·4에 참고 슬라이드 삽입이 없음.
 
 ## 6. 출력 템플릿 (머리부)
 

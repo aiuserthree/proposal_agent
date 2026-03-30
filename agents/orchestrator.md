@@ -23,13 +23,13 @@ Orchestrator는 **단일 PART 집필자가 아니라** 전체 목차·분량·RF
 | PRE | RFP·경로·유형(A~E) 확인 | Level 1~3 태그, MCP 가용성, **`workspace/references/*.md` 또는 사용자 `@` 참고 제안 MD** 유무(있으면 `proposal-structure` §15·§17 체크) | `discussions/` |
 | 1 | RFP 분석 | REQ ID, 평가기준, 제약 | `discussions/rfp-analysis.md` |
 | 2 | 레퍼런스 매칭 | 선택, 1~3순위 근거 | `discussions/reference-match-*.md` |
-| 3 | 전략 | 키워드 3, KPI — **PART 3 서술형·`img/` 레퍼런스**(있을 때) 반영(`writing-style` §1.1d, `proposal-structure` §18) | `drafts/strategist-*.md` |
+| 3 | 전략 | 키워드 3, KPI — **PART 3 서술+표+Mermaid**, 참고 슬라이드는 **구조·모달리티만**(`writing-style` §1.1d, `proposal-structure` §18·§19) | `drafts/strategist-*.md` |
 | 4 | 환경 분석 | 벤치마킹 **3~5 상세** — **`benchmarking-research-agent.mdc`**: Cursor **research-agent**(`run-benchmark` 또는 multi-search→site-scrape→screenshot 등)·**exclusion-criteria**·**search-principles** 활용. AS-IS, 트렌드 | `drafts/analyst-*.md` + `screenshots/` + **`competitor-analysis`**(research-agent 정렬) |
 | 5 | 기획 | IA, 기능, UX | `drafts/planner-*.md` |
 | 6 | 디자인 | 컨셉, 토큰, 레퍼런스 | `drafts/designer-*.md` |
 | 7 | 기술 | 구성도, 스택, 보안 | `drafts/developer-*.md` |
 | 8 | 마케팅 | 유형 D/E만 | `drafts/marketer-*.md` |
-| 9 | **구축·실행(PART 4)** | 방법론·WBS·게이트·이관·Go-Live·교육·하자(분량 최우선) — **서술+표 균형·`img/` 여정·품질·보안 레퍼런스**(있을 때) | `drafts/pm-agent-*.md` |
+| 9 | **구축·실행(PART 4)** | 방법론·WBS·게이트·이관·Go-Live·교육·하자(분량 최우선) — **서술+표+Mermaid**, 참고 자료는 **시간순·그룹·파이프라인 표현만 이식**(§19) | `drafts/pm-agent-*.md` |
 | 10 | 교차 검토 | 점수, MUST/SHOULD | `discussions/critic-review-*.md` |
 | 11 | MUST 수정 | 최대 3회 루프 | 각 draft 갱신 |
 | 12 | 합의 | `consensus-*.md` | `discussions/` |
@@ -174,6 +174,6 @@ rfp_level: 1
 
 ## 25. PART 3·4 품질 (요약)
 
-- **strategist**: PART 3에 경영 메시지(한 줄)·전략 축 서술·KPI·거버넌스; `img/` 있으면 그림 번호·벤치마킹 문구.
-- **pm-agent**: PART 4에 단계별 의미·증거·임계 경로 서술; 방법론·보안·접근성은 레퍼런스 슬라이드로 보강 가능(스택은 PART 7과 정합).
-- **proposal-assembler**: `../../img/` 링크 깨짐 여부 확인; 없으면 서술만으로 분량 유지.
+- **strategist**: PART 3에 경영 메시지(한 줄)·전략 축 서술·KPI·거버넌스; 참고 슬라이드는 **삽입 없이** 구조·논리·표/Mermaid 비중만 반영.
+- **pm-agent**: PART 4에 단계별 의미·증거·임계 경로 서술; 여정·품질·보안은 **표·순서도·게이트**로 표현(스택은 PART 7과 정합).
+- **proposal-assembler**: PART 3·4에 참고 `img/` 삽입 없음 확인; 표·Mermaid 렌더 점검.
